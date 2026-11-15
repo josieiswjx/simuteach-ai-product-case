@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://persistent.oaistatic.com/plugins/visualize/; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<title>Simuteach Demo</title>
+<title>SimuTeach 交互演示</title>
 <style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
 
 </head>
 <body>
-<iframe id="codex-visualization" sandbox="allow-scripts" referrerpolicy="no-referrer" title="Simuteach Demo" data-srcdoc="&lt;!doctype html&gt;
+<iframe id="codex-visualization" sandbox="allow-scripts" referrerpolicy="no-referrer" title="SimuTeach 交互演示" data-srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
 &lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
 &lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://persistent.oaistatic.com/plugins/visualize/; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
-&lt;title&gt;Simuteach Demo&lt;/title&gt;
+&lt;title&gt;SimuTeach 交互演示&lt;/title&gt;
 &lt;style&gt;:root {
   color-scheme: light dark;
   background-color: var(
@@ -2705,8 +2705,8 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;main class=&quot;st-main&quot;&gt;
         &lt;div class=&quot;st-heading&quot;&gt;
           &lt;div&gt;
-            &lt;h1&gt;教师课堂模拟&lt;/h1&gt;
-            &lt;p class=&quot;st-subtitle&quot;&gt;选择数字学生，观察人格、情绪与记忆如何改变课堂反馈。&lt;/p&gt;
+            &lt;h1 id=&quot;st-view-title&quot;&gt;教师课堂模拟&lt;/h1&gt;
+            &lt;p id=&quot;st-view-subtitle&quot; class=&quot;st-subtitle&quot;&gt;选择数字学生，观察人格、情绪与记忆如何改变课堂反馈。&lt;/p&gt;
           &lt;/div&gt;
           &lt;div class=&quot;st-status&quot;&gt;
             &lt;span class=&quot;st-chip&quot;&gt;团队项目&lt;/span&gt;
@@ -2891,6 +2891,22 @@ html&gt;body{padding:0}&lt;/style&gt;
       const analysisButton = root.querySelector(&quot;#st-run-analysis&quot;);
       const analysisPlaceholder = root.querySelector(&quot;#st-analysis-placeholder&quot;);
       const analysisContent = root.querySelector(&quot;#st-analysis-content&quot;);
+      const viewTitle = root.querySelector(&quot;#st-view-title&quot;);
+      const viewSubtitle = root.querySelector(&quot;#st-view-subtitle&quot;);
+      const viewCopy = {
+        &quot;st-panel-chat&quot;: {
+          title: &quot;教师课堂模拟&quot;,
+          subtitle: &quot;选择数字学生，观察人格、情绪与记忆如何改变课堂反馈。&quot;
+        },
+        &quot;st-panel-material&quot;: {
+          title: &quot;教学材料诊断&quot;,
+          subtitle: &quot;将非结构化教学内容转成知识结构、覆盖度与改进建议。&quot;
+        },
+        &quot;st-panel-eval&quot;: {
+          title: &quot;教学技能复盘&quot;,
+          subtitle: &quot;把课堂过程转化为可解释的教学指标与示例证据。&quot;
+        }
+      };
 
       const personas = {
         dazhi: {
@@ -2935,6 +2951,8 @@ html&gt;body{padding:0}&lt;/style&gt;
 
       function selectTab(tab) {
         activeTab = tab.getAttribute(&quot;aria-controls&quot;);
+        viewTitle.textContent = viewCopy[activeTab].title;
+        viewSubtitle.textContent = viewCopy[activeTab].subtitle;
         tabs.forEach((button) =&gt; {
           button.setAttribute(&quot;aria-selected&quot;, String(button === tab));
         });
