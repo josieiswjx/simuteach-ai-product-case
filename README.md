@@ -17,6 +17,10 @@
   <a href="#我的工作">我的工作</a>
 </p>
 
+<p align="center">
+  <a href="https://josieiswjx.github.io/simuteach-ai-product-case/"><strong>打开交互式产品演示 →</strong></a>
+</p>
+
 # SimuTeach：可感知情绪与记忆的教育智能体
 
 面向教师培训的数字学生仿真产品。教师可以在低风险环境中练习课堂互动；系统通过人格、情绪状态和分层记忆生成差异化学生反馈，并把课堂过程转化为可解释的教学技能评测报告。
